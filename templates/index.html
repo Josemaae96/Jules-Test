@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Chess</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container"> <!-- Optional: for overall page centering/max-width -->
+        <h1>Web Chess Game</h1>
+        <div class="game-container">
+            <div id="turn-indicator">Player's Turn: {{ current_player }}</div>
+            <div id="game-messages">Game Messages: {{ game_messages }}</div>
+            <div class="board-container"> <!-- For responsive board sizing -->
+                <div id="chessboard">
+                    <table>
+                        {% for r_idx, row in enumerate(board) %}
+            <tr>
+                {% for c_idx, piece_symbol in enumerate(row) %}
+                <td class="chess-square {% if (r_idx + c_idx) % 2 == 0 %}light-square{% else %}dark-square{% endif %}" 
+                    data-row="{{ r_idx }}" data-col="{{ c_idx }}">
+                    {{ piece_symbol }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+                </div> <!-- end #chessboard -->
+            </div> <!-- end .board-container -->
+        </div> <!-- end .game-container -->
+        <!-- Promotion dialog overlay will be dynamically created by JS if needed,
+             or a placeholder div could be styled here and shown/hidden.
+             Given current JS creates the dialog, it can create overlay too.
+             No explicit placeholder needed here if JS handles full creation. -->
+    </div> <!-- end .page-container -->
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

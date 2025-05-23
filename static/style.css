@@ -1,0 +1,168 @@
+#chessboard {
+    display: inline-block; /* To center the table properly if needed */
+}
+
+#chessboard table {
+    border-collapse: collapse;
+    margin: 20px auto; /* Centers table if #chessboard is block and has width */
+    border: 2px solid #333; /* Border around the whole board */
+}
+
+.chess-square {
+    width: 60px; /* Increased size slightly */
+    height: 60px;
+    text-align: center;
+    font-size: 48px; /* Increased for better visibility of Unicode pieces */
+    vertical-align: middle;
+    /* border: 1px solid #555; */ /* Removed individual cell borders for a cleaner look with table border */
+    user-select: none; /* Prevent text selection of pieces */
+}
+
+.light-square {
+    background-color: #f0d9b5; /* Standard light square color */
+}
+
+.dark-square {
+    background-color: #b58863; /* Standard dark square color */
+}
+
+#turn-indicator {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 60px; /* Helps vertically center text/symbols in the td */
+}
+
+.chess-square.selected-square {
+    background-color: #7CB342 !important; /* A slightly richer green */
+    /* box-shadow: inset 0 0 5px rgba(0,0,0,0.3); */ /* Optional inner shadow */
+}
+
+/* Style for the dot indicating a valid move */
+.move-dot {
+    height: 12px; /* Slightly smaller dot */
+    width: 12px;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark dot */
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; 
+}
+
+/* Ensure .chess-square can be a reference for absolutely positioned children */
+.chess-square {
+    position: relative; 
+}
+
+/* Promotion Dialog Styling */
+#promotion-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 999; /* Below dialog, above other content */
+    display: flex; /* For centering the dialog inside */
+    justify-content: center;
+    align-items: center;
+}
+
+#promotion-dialog {
+    /* Removed fixed positioning, now centered by overlay */
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Above overlay */
+    text-align: center;
+}
+
+#promotion-dialog h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#promotion-dialog button {
+    padding: 10px 18px;
+    margin: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    border: none;
+    border-radius: 5px;
+    background-color: #5cb85c; /* Greenish */
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+#promotion-dialog button:hover {
+    background-color: #4cae4c; /* Darker green */
+}
+
+
+/* Game Messages & Turn Indicator Styling */
+#game-messages {
+    font-size: 1.1em; /* Slightly larger */
+    color: #444; /* Darker grey */
+    margin-bottom: 15px;
+    text-align: center;
+    min-height: 1.5em; 
+    padding: 5px;
+    border-radius: 4px;
+    /* background-color: #f9f9f9; */ /* Optional subtle background */
+    /* border: 1px solid #eee; */
+}
+
+/* JS would add these classes to #game-messages */
+.check-message {
+    color: #d9534f !important; /* Bootstrap danger red */
+    font-weight: bold;
+}
+
+.checkmate-message {
+    color: #d9534f !important;
+    font-weight: bold;
+    font-size: 1.3em !important; /* More prominent */
+    padding: 10px;
+    border: 2px solid #d9534f;
+    background-color: #f2dede; /* Light red background */
+}
+
+
+#turn-indicator {
+    font-size: 1.3em; /* Larger */
+    font-weight: bold;
+    margin-bottom: 15px; /* Increased spacing */
+    text-align: center;
+    color: #337ab7; /* Bootstrap primary blue */
+}
+
+/* General Layout & Font */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif stack */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding-top: 20px;
+    background-color: #f4f4f4; /* Light grey background for the page */
+    color: #333; /* Default text color */
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Darker, more neutral color for header */
+    margin-bottom: 20px;
+}
+
+/* Responsive container for the board */
+.board-container {
+    width: 100%;
+    max-width: 520px; /* Board width (8*60 + borders etc.) + some padding */
+    margin: 0 auto; /* Center the container */
+}
